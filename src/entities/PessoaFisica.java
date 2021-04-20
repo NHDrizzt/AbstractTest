@@ -21,38 +21,37 @@ public class PessoaFisica extends Pessoa{
 		this.gastos = gastos;
 	}
 	
-	public final double calcRenda() { 
+	@Override
+	public final double tax() { 
+		double imp=0;
 		if(rendaAnual < 20000 && rendaAnual > 0) {
 			if(gastos > 0) {
-				gastos -= gastos*0.5;
-				rendaAnual -= ((rendaAnual * 0.15) + gastos);
+				imp = rendaAnual * 0.15 - gastos * 0.5;
 			}
 			else {
-				rendaAnual -= rendaAnual * 0.15;
+				imp = rendaAnual * 0.15;
 			}
 
 		}
 		else {
 			if(gastos > 0) {
-				gastos -= gastos*0.5;
-				rendaAnual -= ((rendaAnual * 0.25) + gastos);
+				imp = rendaAnual * 0.25 - gastos * 0.5;
 			}
-			rendaAnual -= rendaAnual * 0.25;
+			else {
+				imp = rendaAnual * 0.25;
+			}
+
 		}
 		
-		return rendaAnual;
+		return imp;
 	}
+
 	
-	public final double totalImposto() {
-		double totalImp=0;
-		if(rendaAnual < 20000) {
-			totalImp =  rendaAnual * 0.15;
-		}
-		else {
-			totalImp = rendaAnual * 0.25;
-		}
-		
-		return totalImp;
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(nome +": $");
+		sb.append(tax()+ "\n");
+		return sb.toString();
 	}
 	
 }

@@ -21,14 +21,24 @@ public class PessoaJuridica extends Pessoa{
 		this.numFunc = numFunc;
 	}
 
-	public double calcImposto() {
+	@Override
+	public double tax() {
+		double imp =0;
 		if(numFunc < 10) {
-			rendaAnual -= rendaAnual * 0.16;
+			imp = rendaAnual * 0.16;
 		}
 		else {
-			rendaAnual -= rendaAnual * 0.14;
+			imp = rendaAnual * 0.14;
 		}
 	
-		return rendaAnual;
+		return imp;
+	}
+	
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(nome +": $");
+		sb.append(String.format("%.2f", tax())+ "\n");
+		return sb.toString();
 	}
 }
