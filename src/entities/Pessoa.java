@@ -31,4 +31,6 @@ public abstract class Pessoa {
 		this.rendaAnual = rendaAnual;
 	}
 	
+	public abstract double tax();
+	
 }
